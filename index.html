@@ -2,24 +2,31 @@
 <html ng-app="app">
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Harry Details</title>
+    <title>Harry's Details</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body ng-controller="mainController">
     <header>
         <h2>Harry's Account Details</h2>
+        <div data-ng-show="!(showAccountDetails)">
         Search by name: <input type="text" ng-model="searchByName">
-        <br><br>
+        </div>
+        <br>
+        <div data-ng-show="(showAccountDetails)">
         Account Category:  <select name="selectAccount" id="multipleSelect" ng-model="selectAccount">
-                                <option value="Current Account">current</option>
-                                <option value="Savings Account">savings</option>
-                                <option value="FD Account">deposits</option>
-                                <option value="My Gold Card">cards</option>
-                                <option value="loan">loan</option>
+                                <option value="current">current</option>
+                                <option value="savings">savings</option>
+                                <option value="deposits">deposits</option>
+                                <option value="bank cards">bank cards</option>
+                                <option value="bank loan">bank loan</option>
                             </select>
+        </div>
+        <br>
+        Show account by categroy: <input type="button" value="Show" ng-click="showDetails('show')"> <input type="button" value="Hide" ng-click="showDetails('hide')">
     </header>
     <br><br>
-    <table>
+    <h3>Account Details</h3>
+    <table data-ng-if="!(showAccountDetails)">
         <thead>
             <tr>
                 <th>Id</th>
@@ -31,8 +38,8 @@
                 <th>limit</th>
             </tr>
         </thead>
-        <tbody ng-repeat="data in displayData.accounts | filterData | orderBy: order | filter: searchByName | filter: selectAccount">
-            <tr data-ng-if="selectAccount !== 'loan'">
+        <tbody ng-repeat="data in displayData.accounts | filterData | orderBy: order | filter: searchByName">
+            <tr>
                 <td>{{data.id}}</td>
                 <td>{{data.branch}}</td>
                 <td>{{data.name}}</td>
@@ -43,6 +50,34 @@
             </tr>
         </tbody>
     </table>
+
+    <div ng-repeat="accData in accountsArray | filter: selectAccount" data-ng-if="showAccountDetails">
+        <h3>{{accData.title}}</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Branch</th>
+                <th>Name</th>
+                <th>Currency</th>
+                <th>Order</th>
+                <th>balance</th>
+                <th>limit</th>
+            </tr>
+            </thead>
+            <tbody ng-repeat="acc in accData">
+            <tr ng-repeat="data in acc">
+                <td>{{data.id}}</td>
+                <td>{{data.branch}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.balance}}</td>
+                <td>{{data.order}}</td>
+                <td>{{data.balance}}</td>
+                <td>{{data.limit}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="js/app.js"></script>

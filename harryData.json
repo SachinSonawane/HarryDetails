@@ -69,7 +69,7 @@
         "maturityDate": "11-oct-2025"
 
       }, {
-        "id": "31005",
+        "id": "31006",
         "branch": "GGN",
         "name": "FD Account - 2",
         "currency": "INR",
@@ -81,7 +81,7 @@
 
       }]
     }, {
-      "cards": [{
+      "bank cards": [{
         "id": "4111111111111111",
         "type": "VISA",
         "name": "My Gold Card",
@@ -92,7 +92,7 @@
 
       }]
     }, {
-      "loans": []
+      "bank loans": [{}]
     }]
 
 

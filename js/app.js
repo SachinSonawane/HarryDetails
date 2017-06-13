@@ -5,8 +5,27 @@ var app = angular.module('app', []);
 
 app.controller('mainController', function($scope, responseService) {
     $scope.displayData = {};
+    $scope.showAccountDetails = false;
     var displayResponse = function(data) {
         $scope.displayData = data.profile;
+        $scope.accountsArray = [];
+
+        angular.forEach(data.profile.accounts, function(value, index){
+            angular.forEach(value, function(val, ind){
+                $scope.accountsArray.push({
+                    title:ind,
+                    accData:val
+                })
+            });
+        });
+
+        $scope.showDetails = function(check) {
+            if(check === 'show') {
+                $scope.showAccountDetails = true;
+            } else {
+                $scope.showAccountDetails = false;
+            }
+        }
     };
     responseService.getResponse(displayResponse);
 
@@ -18,9 +37,6 @@ app.controller('mainController', function($scope, responseService) {
     $scope.orderDescending = function() {
         $scope.order = '-name';
     }
-
-    $scope.dropdownList = ['current', 'savings', 'deposits', 'cards', 'loans']
-
 });
 
 app.factory('responseService', function($http) {
