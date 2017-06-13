@@ -6,6 +6,7 @@ var app = angular.module('app', []);
 app.controller('mainController', function($scope, responseService) {
     $scope.displayData = {};
     $scope.showAccountDetails = false;
+    
     var displayResponse = function(data) {
         $scope.displayData = data.profile;
         $scope.accountsArray = [];
@@ -17,16 +18,16 @@ app.controller('mainController', function($scope, responseService) {
                     accData:val
                 })
             });
-        });
-
-        $scope.showDetails = function(check) {
-            if(check === 'show') {
-                $scope.showAccountDetails = true;
-            } else {
-                $scope.showAccountDetails = false;
-            }
-        }
+        });   
     };
+    
+    $scope.showDetails = function(check) {
+        if(check === 'show') {
+            $scope.showAccountDetails = true;
+        } else {
+            $scope.showAccountDetails = false;
+        }
+    }
     responseService.getResponse(displayResponse);
 
     $scope.order = 'order';
