@@ -6,5 +6,6 @@
 
 ## Impemented functionality
 * By default, the accounts is loaded in the ascending order of the field 'order'.
-* You can serach yor details by 'name' also arrange it in ascending / descending order.
+* You can sort your account details by account type.
+* You can serach yor details also arrange it in ascending / descending order.
 * Search by account category option is available.
